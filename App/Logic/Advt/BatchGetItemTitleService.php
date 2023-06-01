@@ -7,11 +7,11 @@ use GuzzleHttp\Promise\Utils;
 
 //slow than GetEbayTitleService, so not recommend
 class BatchGetItemTitleService {
-  public $urlPrefix = "https://www.ebay.%s/itm/%d";
+    public $urlPrefix = "https://www.ebay.%s/itm/%d";
 
-  public $advtData;
+    public $advtData;
 
-   public $url;
+    public $url;
 
     public function __construct($advtData){
         $this->advtData = $advtData;

@@ -26,8 +26,12 @@ class TestDB extends Base{
         // $user = $this->getUserInfoByModel($this->params['uid']?:1);
         $user = $this->getUserInfoByService($this->params['uid']??1);
 
-
         print_r($user);
+
+
+        //test cahce
+        $cateData = $this->redis->getset('test',123);
+        var_dump($cateData);
 
     }
 

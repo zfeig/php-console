@@ -4,6 +4,7 @@
         "illuminate/database": "*",
         "phpoffice/phpspreadsheet": "^1.15",
         "guzzlehttp/guzzle": "^7.0",
-        "nesbot/carbon": "^2.16"
+        "nesbot/carbon": "^2.16",
+        "predis/predis":"^2.0.0"
     }
 }

@@ -8,12 +8,15 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 
 use App\Func\Config;
 use Illuminate\Database\Capsule\Manager as DB;
+use Predis\Client;
 
 class Base {
 
     public  $params;
 
 	public  $basePath;
+
+	public $redis;
 
 
     public function __construct($argv) {
@@ -30,6 +33,7 @@ class Base {
 		$this->autoLoadClass();
 		$this->loadConfig();
 		$this->loadDB();
+		$this->loadCache();
 	}
 
     public function getParams($argv) {
@@ -98,11 +102,24 @@ class Base {
 			'password' => $dbConf['pwd'],
 			'charset' => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix' => '',
+			'prefix' => $dbConf['prefix'],
 		]);
 
 		$db->setAsGlobal();
 		$db->bootEloquent();
+	}
+
+
+	public function loadCache(){
+
+		$rdsConf = Config::get('redis');
+
+		$this->redis = new Client([
+			'host'   => $rdsConf['host'],
+			'port'   => $rdsConf['port'],
+			'database' => $rdsConf['db'],
+			'password'=> $rdsConf['auth']
+		]);
 	}
     
 }
