@@ -1,0 +1,9 @@
+{
+    "require": {
+        "doctrine/dbal": "^2.0",
+        "illuminate/database": "*",
+        "phpoffice/phpspreadsheet": "^1.15",
+        "guzzlehttp/guzzle": "^7.0",
+        "nesbot/carbon": "^2.16"
+    }
+}
