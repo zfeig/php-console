@@ -2,7 +2,6 @@
 
 namespace App\Console\Advt;
 
-include_once '../Base.php';  
 
 use App\Func\Config;
 use App\Console\Base;
@@ -30,8 +29,8 @@ class TestDB extends Base{
 
 
         //test cahce
-        $cateData = $this->redis->getset('test',123);
-        var_dump($cateData);
+        // $cateData = $this->redis->getset('test',123);
+        // var_dump($cateData);
 
     }
 
@@ -56,7 +55,3 @@ class TestDB extends Base{
         ];
     }
 }
-
-
-$obj = new TestDB($argv);
-$obj->run();

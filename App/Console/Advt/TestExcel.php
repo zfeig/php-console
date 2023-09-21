@@ -2,7 +2,6 @@
 
 namespace App\Console\Advt;
 
-include_once '../Base.php';  
 
 use App\Func\Config;
 use App\Lib\ExcelToolService;
@@ -26,7 +25,3 @@ class TestExcel extends Base{
 
     }
 }
-
-
-$obj = new TestExcel($argv);
-$obj->run();

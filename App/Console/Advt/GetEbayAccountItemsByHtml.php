@@ -5,7 +5,6 @@
 **/
 namespace App\Console\Advt;
 
-include_once '../Base.php';
 
 use App\Console\Base;
 
@@ -112,8 +111,3 @@ class GetEbayAccountItemsByHtml  extends Base{
         }
 	}
 }
-
-
-
-$obj = new GetEbayAccountItemsByHtml($argv);
-$obj->run();

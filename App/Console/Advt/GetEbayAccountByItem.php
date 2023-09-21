@@ -1,12 +1,10 @@
 <?php 
 /**
 *@desc 检查指定item获取广告账号信息
-*@exec   php GetEbayAccountByItem.php f=itm-for-account.xlsx
+*@exec   php  console.php r=Advt/GetEbayAccountByItem f=itm-for-account.xlsx
 *
 **/
 namespace App\Console\Advt;
-
-include_once '../Base.php';
 
 
 use App\Console\Base;
@@ -57,7 +55,3 @@ class GetEbayAccountByItem extends Base{
 
     }
 }
-
-
-$obj = new GetEbayAccountByItem($argv);
-$obj->run();

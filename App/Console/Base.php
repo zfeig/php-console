@@ -3,37 +3,41 @@ namespace App\Console;
 
 //设置全局常量
 define("ROOT_PATH",str_replace(str_replace("\\","/",__NAMESPACE__),"",__DIR__));
+define("BASE_PATH",ROOT_PATH.DIRECTORY_SEPARATOR."App".DIRECTORY_SEPARATOR."Console".DIRECTORY_SEPARATOR);
 define("STATIC_PATH",ROOT_PATH."statics");
 define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 
 use App\Func\Config;
+use App\Func\MongoTool;
+use App\Func\RedisTool;
 use Illuminate\Database\Capsule\Manager as DB;
-use Predis\Client;
 
-class Base {
+
+
+abstract class Base {
 
     public  $params;
 
 	public  $basePath;
 
-	public $redis;
 
+	abstract public function run();
 
     public function __construct($argv) {
         
 		$this->params = $this->getParams($argv);
 		$this->basePath = $this->getBasePath();		
 		$this->bootstrap();
-
     }
 
 
-
+	
 	public function bootstrap() {
 		$this->autoLoadClass();
 		$this->loadConfig();
 		$this->loadDB();
 		$this->loadCache();
+		$this->loadMongo();
 	}
 
     public function getParams($argv) {
@@ -79,7 +83,7 @@ class Base {
 	public function loadConfig(){
 
 		$confPath = $this->basePath."config".DIRECTORY_SEPARATOR;
-
+		
 		$baseData = require_once $confPath."config.php";
 
 		$envData = require_once $confPath.APPLICATION_ENV.".php";
@@ -113,13 +117,17 @@ class Base {
 	public function loadCache(){
 
 		$rdsConf = Config::get('redis');
+		RedisTool::connect($rdsConf);
 
-		$this->redis = new Client([
-			'host'   => $rdsConf['host'],
-			'port'   => $rdsConf['port'],
-			'database' => $rdsConf['db'],
-			'password'=> $rdsConf['auth']
-		]);
 	}
+
+
+	public function loadMongo(){
+		
+		$mongoConf = Config::get('mongo');   
+		MongoTool::connect($mongoConf);
+
+	}
+  
     
 }

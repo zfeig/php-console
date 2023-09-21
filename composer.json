@@ -5,6 +5,7 @@
         "phpoffice/phpspreadsheet": "^1.15",
         "guzzlehttp/guzzle": "^7.0",
         "nesbot/carbon": "^2.16",
-        "predis/predis":"^2.0.0"
+        "predis/predis":"^2.0.0",
+        "mongodb/mongodb": "^1.8"
     }
 }

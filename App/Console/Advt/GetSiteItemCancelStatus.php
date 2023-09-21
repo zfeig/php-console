@@ -5,7 +5,6 @@
 **/
 namespace App\Console\Advt;
 
-include_once '../Base.php';
 
 use App\Logic\Advt\GetEbayAdvtStatusService;
 use App\Lib\ExcelToolService;
@@ -57,5 +56,3 @@ class getSiteItemCancelStatus extends Base{
 }
 
 
-$obj = new getSiteItemCancelStatus($argv);
-$obj->run();

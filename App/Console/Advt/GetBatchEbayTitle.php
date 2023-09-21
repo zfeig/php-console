@@ -1,10 +1,10 @@
 <?php 
 /**
  * @sedc 通过excel提供site,item信息，批量获取广告标题
+ * @uage php console.php -r Advt/getBatchTitle
  */
 namespace App\Console\Advt;
 
-include_once '../Base.php';
 
 use App\Console\Base;
 
@@ -41,5 +41,3 @@ class getBatchTitle extends Base{
 }
 
 
-$obj = new getBatchTitle($argv);
-$obj->run();
