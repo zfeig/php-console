@@ -1,14 +1,14 @@
 <?php
 /**
- * 通用 , 适用于全局
+ * 通用适用于全局响应
  *
  */
 
 namespace App\Response;
 
 /**
- * Trait BaseTrait
- * @package App\Traits
+ * common REsponse
+ * @package App\Response
  */
 class Response
 {
