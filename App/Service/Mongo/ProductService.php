@@ -2,7 +2,7 @@
 namespace App\Service\Mongo;
 use App\Service\Mongo\BaseService;
 use App\Task\ProductTask;
-use \MongoDB\BSON\ObjectId;
+
 
 class ProductService extends BaseService{
 
@@ -38,7 +38,7 @@ class ProductService extends BaseService{
 
         $targetData = $this->getObject(ProductTask::class)->findOne(
                 [
-                    '_id' => new ObjectId('63edd4fa1827b2fa4f3f89a6')
+                    '_id' =>   ProductTask::newObjectId('63edd4fa1827b2fa4f3f89a6')
                 ]
         );
 

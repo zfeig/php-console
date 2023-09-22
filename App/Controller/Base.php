@@ -1,5 +1,6 @@
 <?php 
 namespace App\Controller;
+use App\Constant\Constant;
 use App\Response\Response;
 use App\Lib\ExcelToolService;
 use Context;
@@ -39,7 +40,6 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
         
 		$this->basePath = $this->getBasePath();		
 
-        // echo "base path is:".$this->basePath.PHP_EOL;
 		$this->bootstrap();
 
 		$this->initContext();
@@ -117,7 +117,7 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 
 			Config::set(array_merge($baseData,$envData));
 		 } else{
-			fwrite(STDIN,"***********config has loaded***********".PHP_EOL);
+			fwrite(STDIN,Constant::MSG_CONFIG_LOADED.PHP_EOL);
 		 }	
 	}
 
@@ -127,16 +127,18 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 		$db = new DB;
 
 		$dbConf = Config::get('db')['mysql'];
-		$db->addConnection([
-			'driver' => $dbConf['driver'],
-			'host' => $dbConf['host'],
-			'database' => $dbConf['database'],
-			'username' => $dbConf['user'],
-			'password' => $dbConf['pwd'],
-			'charset' => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix' => $dbConf['prefix'],
-		]);
+		$db->addConnection(
+			[
+				'driver' => $dbConf['driver'],
+				'host' => $dbConf['host'],
+				'database' => $dbConf['database'],
+				'username' => $dbConf['user'],
+				'password' => $dbConf['pwd'],
+				'charset' => Constant::CHAR_SET,
+				'collation' => Constant::COLLATION,
+				'prefix' => $dbConf['prefix'],
+			]
+		);
 
 		$db->setAsGlobal();
 		$db->bootEloquent();
@@ -149,8 +151,7 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 			$rdsConf = Config::get('redis');
 			RedisTool::connect($rdsConf);
 	   }else{
-			
-			fwrite(STDIN,"***********redis has conneced !***********".PHP_EOL);
+			fwrite(STDIN,Constant::MSG_REDIS_CONNECTED.PHP_EOL);
 	   }
 
 	}
@@ -162,7 +163,7 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 			$mongoConf = Config::get('mongo');   
 			MongoTool::connect($mongoConf);
 	   }else{
-			fwrite(STDIN,"***********mongo has conneced !***********".PHP_EOL);
+			fwrite(STDIN,Constant::MSG_MONGO_CONNECTED.PHP_EOL);
 	   }
 	}
     

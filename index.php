@@ -75,9 +75,8 @@ class Server {
 
         $actionName = sprintf("%sAction",$this->route['method']);
 
-
         if (!class_exists($className)) {
-            throw new \Exception("class name:".$className." is not exist!");
+            throw new \Exception("class name:".$className." is not exist!!");
         }
 
 

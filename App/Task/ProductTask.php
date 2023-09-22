@@ -2,7 +2,7 @@
 
 namespace App\Task;
 
-class ProductTask {
+class ProductTask extends BaseTask{
 
     /**
      * @mongo colection name
