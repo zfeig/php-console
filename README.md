@@ -95,7 +95,7 @@ index.php
 
 ##### 2.2.2.1 Controller：
 
-**```Controller``` ** 控制器目录，该目录构成为：```Base.php``` 加上多个 模块控制器的的组合，其中```Base.php ``` 为控制器父类的实现，具体业务控制器都要继承该类，如```Controller/Index/IndexController.php```  继承自父类控制器，*Index*是默认的控制器模块，```IndexController```是默认控制器；模块命名规范为首字母大写，模块控制器命名规范为驼峰法控制器名+```Controller.php``` ,控制器类名必须和文件名保持一致。
+```Controller```  控制器目录，该目录构成为：```Base.php``` 加上多个 模块控制器的的组合，其中```Base.php ``` 为控制器父类的实现，具体业务控制器都要继承该类，如```Controller/Index/IndexController.php```  继承自父类控制器，*Index*是默认的控制器模块，```IndexController```是默认控制器；模块命名规范为首字母大写，模块控制器命名规范为驼峰法控制器名+```Controller.php``` ,控制器类名必须和文件名保持一致。
 
 如果想扩展一个*Student*模块控制器，可以新建```Controller/Student/IndexController.php``` 文件，具体写法可参考Index模块控制器即可，代码示例如下：
 
@@ -124,7 +124,7 @@ class IndexController extends Base{
 
 ##### 2.2.2.2 Console：
 
-**```Console``` ** 自动任务目录，该目录构成和**Controller**类似：```Base.php``` 加上多个 模块的组合，其中```Base.php ``` 为自动任务父类的实现，具体业务自动任务都要继承该类，如```Console/Index/IndexConsole.php```  *Index*是默认的自动任务模块，```IndexConsole.php```是模块默认自动任务文件，模块命名规范上模块名首字母大写，自动任务命名比较灵活，首字母大写和驼峰发组合，类命和文件名保持一致；如```Console/Mysql/TestMysql.php``` 表示```Mysql```模块下的```TestMysql```自动任务，示例代码如下：
+```Console``` 自动任务目录，该目录构成和```Controller```类似：```Base.php``` 加上多个 模块的组合，其中```Base.php ``` 为自动任务父类的实现，具体业务自动任务都要继承该类，如```Console/Index/IndexConsole.php```  *Index*是默认的自动任务模块，```IndexConsole.php```是模块默认自动任务文件，模块命名规范上模块名首字母大写，自动任务命名比较灵活，首字母大写和驼峰发组合，类命和文件名保持一致；如```Console/Mysql/TestMysql.php``` 表示```Mysql```模块下的```TestMysql```自动任务，示例代码如下：
 
 ```php
 <?php
@@ -161,7 +161,7 @@ class TestMysql extends Base{
 
 ```Logic``` 目录：业务逻辑封装，可在应用（Controller/Console）中直接调用，根据实际需求按功能模块目录区分
 
-```Model``` 目录：DB封装，这里使用了```Laravel```框架的**```Eloquent ORM ``` **组件,按照```Laravel```方式进行数据模型封装即可
+```Model``` 目录：DB封装，这里使用了```Laravel```框架的```Eloquent ORM ``` 组件,按照```Laravel```方式进行数据模型封装即可
 
 ```Task```目录: 简单的```MongoDB```集合定义，这里定义了```Mongo collection```信息
 
@@ -418,7 +418,7 @@ loadMongo方法，顾名思义就是加载```MongoDB```实例,这里前面已有
 
 
 
-### 3. 2、控制器执行流程
+### 3.2、控制器执行流程
 
 
 
@@ -568,7 +568,7 @@ $sv->start();
 
 
 
-```controller```整个流程和```console```类似，不同之处在于，```controller```引入了基于```Swoole```的```http```服务器，采用常驻的 ```cli``` 运行模式，每次请求不用加载全部项目代码，效率更高。因此新增了**```Context```**对象方便请求实例的复用和核心类的挂载。
+```controller```整个流程和```console```类似，不同之处在于，```controller```引入了基于```Swoole```的```http```服务器，采用常驻的 ```cli``` 运行模式，每次请求不用加载全部项目代码，效率更高。因此新增了```Context```对象方便请求实例的复用和核心类的挂载。
 
 
 
@@ -624,7 +624,7 @@ phpize
 
 #### 4.1.3 ```Swoole```扩展安装：
 
-进入http://pecl.php.net/package/swoole选择合适的适配版本,完整安装命令如下
+进入http://pecl.php.net/package/swoole 选择合适的适配版本,完整安装命令如下
 
 ```shell
 wget http://pecl.php.net/get/swoole-4.5.0.tgz
@@ -640,7 +640,7 @@ phpize
 
 #### 4.1.4 ```Redis```扩展安装：
 
-进入http://pecl.php.net/package/swoole选择合适的适配版本,完整安装命令如下
+进入http://pecl.php.net/package/swoole 选择合适的适配版本,完整安装命令如下
 
 
 
@@ -762,7 +762,7 @@ sudo docker restart php-console-v2
 
 ### 5.1 代码下载
 
-提供项目下载地址，飞书下载地址
+提供项目下载地址，飞书下载地址如下：
 
 
 
@@ -782,5 +782,12 @@ sudo docker restart php-console-v2
 
 ### 5.3 注意事项
 
- 未完待续
+* 项目启动前，先根据实际配置好对应的数据库缓存连接
 
+* 项目中根据业务情况合理拆分服务
+
+* Context的应用场景，推荐在控制器中使用，不要在类库和服务中直接使用，否则同时使用自动任务时会出错
+
+* 控制器和自动任务相关服务做好兼容复用
+
+* 未完待续
