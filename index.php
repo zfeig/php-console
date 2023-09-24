@@ -99,13 +99,13 @@ class Server {
         $res =  $instance->{$actionName}();
 
         //debug
-        var_dump([
-            'class_name' => $className,
-            'action_name' => $actionName,
-            'route' => $this->route,
-            'params'=>$instance->getParams(),
-            'res' => $res
-        ]);
+        // var_dump([
+        //     'class_name' => $className,
+        //     'action_name' => $actionName,
+        //     'route' => $this->route,
+        //     'params'=>$instance->getParams(),
+        //     'res' => $res
+        // ]);
 
          return $res;
 
@@ -129,7 +129,7 @@ class Server {
                 $this->dispath();
                 
                 $resData = $this->getInstance();
-
+                
                 $response->header("Content-Type", "application/json; charset=utf-8");
 
             }catch(\Throwable $e) {

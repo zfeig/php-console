@@ -21,30 +21,19 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 
   class Base {
 
-	
-
     public  $params;
 
 	public  $basePath;
-
 
 	public $whiteList = [
 		'Symfony\Component\Translation\TranslatorInterface'
 	];
 
-
-
-	
-
     public function __construct() {
-        
 		$this->basePath = $this->getBasePath();		
-
-		$this->bootstrap();
-
-		$this->initContext();
-
+		$this->bootstrap();		
     }
+
 
     public  function setParams($params){
         $this->params = $params;
@@ -62,8 +51,8 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 		$this->loadDB();
 		$this->loadCache();
 		$this->loadMongo();
+		$this->initContext();
 	}
-
 
 
 	/**
@@ -74,14 +63,10 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 		Context::set(new ExcelToolService());
 	}
 
-
-
 	public function getBasePath() {
 	   
 		 return ROOT_PATH;
 	}
-
-
 
 	public function autoLoadClass() {
 		//自动加载第三方扩展类库
@@ -96,7 +81,7 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 				require_once "{$currentFile}";
 			} else if(in_array($className,$this->whiteList)){
 				if (PHP_SAPI == "cli") {
-					fwrite(STDIN,"ignore error load class:".$className);
+					fwrite(STDIN,"ignore error load class:".$className.PHP_EOL);
 				}  
 			} else{
 				throw new \Exception("class {$className} is not exist!");
@@ -125,7 +110,6 @@ define('APPLICATION_ENV', $_ENV['SERVER_ENV'] ?? 'test');
 	public function loadDB(){
 
 		$db = new DB;
-
 		$dbConf = Config::get('db')['mysql'];
 		$db->addConnection(
 			[
