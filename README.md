@@ -750,6 +750,77 @@ sudo docker restart php-console-v2
 
 
 
+### 4.3 使用docker-compose部署
+
+项目支持通过```docker-compose``` 方式，配置好容器内容编排后，使用docker-compose命令，一键部署，非常方便，强烈推荐！具体步骤如下：
+
+#### 4.3.1 安装docker-compose
+
+```shell
+#下载可执行文件
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+#设置可执行权限
+sudo chmod +x /usr/local/bin/docker-compose
+
+#设置快捷方式
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+#查看版本
+docker-compose --version
+
+```
+
+#### 4.3.2 编写修改docker-compose.yml文件
+
+支持按需求自定义容器配置，比如端口映射，指定容器镜像，指定挂载目录等，具体配置如下：
+
+```yaml
+version: '3'
+services:
+  php-console-v2:
+    container_name: php-console-v2
+    image: php-console:v2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/opt/www:rw
+    ports:
+      - 9001:9001
+    restart: always  
+    environment:
+      - APP_ENV=dev
+      - SCAN_CACHEABLE=false
+
+networks:
+ default:
+    name: php-console-v2
+```
+
+#### 4.3.3 编译容器
+
+```shell
+sudo docker-compose build
+```
+
+#### 4.3.4 启动容器
+
+```shell
+sudo docker-compose up -d
+```
+
+#### 4.3.5 验证容器是否正常启动
+
+输入 http://127.0.0.1:9001/ 查看是否正常输出记过，如果报错提示找不到加载文件，则需要进入容器安装依赖
+
+```shell
+
+sudo docker exec -it php-console-v2 /bin/bash
+
+cd /opt/www && compose install
+
+```
 
 
 

@@ -41,8 +41,6 @@ RUN set -ex \
 
 WORKDIR /opt/www
 
-#构建镜像时，请根据时间项目路径填写
-VOLUME [ "/disks/F/php-console-v2"]
 
 RUN chmod -R 0777 /opt/www 
 # Composer Cache

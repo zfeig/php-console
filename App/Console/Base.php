@@ -70,7 +70,7 @@ abstract class Base {
 		spl_autoload_register(function($className)
 		{
 			$currentFile = $this->basePath. str_replace("\\","/",$className) .".php";
-			echo "try to auto load ".$currentFile.PHP_EOL;
+			//echo "try to auto load ".$currentFile.PHP_EOL;
 			if (file_exists($currentFile)) {
 				require_once "{$currentFile}";
 			} else{
