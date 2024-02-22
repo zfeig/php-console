@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./:/opt/www:rw
+      - /opt/www/vendor
     ports:
       - 9001:9001
     restart: always  
